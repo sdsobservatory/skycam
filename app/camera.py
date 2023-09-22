@@ -2,7 +2,6 @@ from typing import Union, Optional
 import asyncio
 from io import BytesIO
 from datetime import datetime
-from threading import RLock
 from astropy.io import fits
 import numpy as np
 import app.zwo as zwo
@@ -14,7 +13,6 @@ class Camera:
         self._camera = zwo.Camera(identifier)
         self._buffer = bytearray()
         self._fits_data = BytesIO()
-        self._lock = RLock()
         self.is_exposing = False
 
     def __enter__(self) -> 'Camera':
@@ -90,16 +88,14 @@ class Camera:
                 hdu.header['BAYERPAT'] = (bayer, 'Bayer pattern')
                 hdu.header['COLORTYP'] = (bayer, 'Bayer pattern')
 
-            with self._lock:
-                self._fits_data.close()
-                self._fits_data = BytesIO()
-                hdu.writeto(self._fits_data)
+            self._fits_data.close()
+            self._fits_data = BytesIO()
+            hdu.writeto(self._fits_data)
             return self._fits_data
         except:
             self._clear_buffer()
-            with self._lock:
-                self._fits_data.close()
-                self._fits_data = BytesIO()
+            self._fits_data.close()
+            self._fits_data = BytesIO()
             raise
         finally:
             self.is_exposing = False
@@ -111,5 +107,4 @@ class Camera:
 
     @property
     def most_recent_fits_data(self) -> BytesIO:
-        with self._lock:
-            return self._fits_data
+        return self._fits_data
