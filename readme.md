@@ -44,13 +44,43 @@ The camera is at on `Bus 001` as `Device 003` so the path is `/dev/bus/usb/001/0
 docker run -d -p 80:80 --device=/dev/bus/usb/001/003 --pull=always --restart unless-stopped --name=skycam sdso/skycam:latest
 ```
 
+Once up and running, you can start an exposure, poll for its status, and download the completed image.
+
+### Start an Exposure
+```
+POST /camera/expose
+Content-Type: application/json
+{
+  "exposure": 3.0,
+  "gain": 50,
+  "offset": 10
+}
+```
+
+### Get Status
+```
+GET /camera/status
+Content-Type: application/json
+{
+  "status": "exposing",
+}
+```
+
+### Download Image
+```
+GET /camera/image
+Content-Type: application/octet-stream
+Content-Length: 1234
+<binary data>
+```
+
 ## Build
 
 The container is cross-compiled for `arm64v8`.
 You may need to `apt install qemu-user-static` to build the container on x64.
 
 ```shell
-DOCKER_BUILDKIT=1 docker buildx build --platform linux/arm64 -t sdso/skycam:latest .
+DOCKER_BUILDKIT=1 docker buildx build --platform linux/arm64v8 -t sdso/skycam:latest .
 ```
 
 
