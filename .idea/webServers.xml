@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3235f545-0805-468b-b721-d5e8c874f2c6" name="skycam">
+        <fileTransfer accessType="SFTP" host="192.168.1.248" port="22" sshConfigId="6cf5630f-1cee-447a-839f-3eebd071594b" sshConfig="alex@192.168.1.248:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,23 @@
+### GET metrics
+GET http://{{host}}:{{port}}/metrics
+Content-Type: text/plain
+
+### POST start exposure
+POST http://{{host}}:{{port}}/camera/expose
+Content-Type: application/json
+
+{
+  "exposure": 3.0,
+  "gain": 50,
+  "offset": 10
+}
+
+### GET exposure status
+GET http://{{host}}:{{port}}/camera/status
+Accept: application/json
+
+### GET download image
+GET http://{{host}}:{{port}}/camera/image
+Accept: application/octet-stream
+
+>> /tmp\image.fits

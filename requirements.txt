@@ -1,0 +1,5 @@
+fastapi~=0.103.1
+numpy~=1.26.0
+astropy~=5.3.3
+uvicorn~=0.23.2
+prometheus-fastapi-instrumentator~=6.1.0
