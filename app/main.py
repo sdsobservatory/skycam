@@ -60,6 +60,6 @@ async def camera_image(request: Request):
     camera: Camera = request.app.state.camera
     length = camera.most_recent_fits_data.getbuffer().nbytes
     camera.most_recent_fits_data.seek(0)
-    return StreamingResponse(camera.most_recent_fits_data,
-                             media_type='application/octet-stream',
-                             headers={'Content-Length': str(length)})
+    return Response(camera.most_recent_fits_data.getvalue(),
+                    media_type='application/octet-stream',
+                    headers={'Content-Length': str(length)})
