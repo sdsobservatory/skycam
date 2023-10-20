@@ -83,7 +83,7 @@ class Camera:
             hdu.header['GAIN'] = (gain, 'Sensor gain')
             hdu.header['OFFSET'] = (offset, 'Sensor offset')
             if camera_info['IsColorCam']:
-                bayer_lookup = {0: 'RGGB', 1: 'BGGR', 2: 'GRBG', 3: 'RGBG'}
+                bayer_lookup = {0: 'RGGB', 1: 'BGGR', 2: 'GRBG', 3: 'GBRG'}
                 bayer = bayer_lookup[camera_info['BayerPattern']]
                 hdu.header['BAYERPAT'] = (bayer, 'Bayer pattern')
                 hdu.header['COLORTYP'] = (bayer, 'Bayer pattern')

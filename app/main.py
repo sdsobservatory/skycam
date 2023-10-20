@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from fastapi import FastAPI, Request, Response, BackgroundTasks
-from fastapi.responses import StreamingResponse
 from prometheus_fastapi_instrumentator import Instrumentator
 from app.camera import Camera
 
